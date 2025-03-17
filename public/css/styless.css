@@ -1,0 +1,214 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #d4edda 25%, white 75%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Main Container */
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch; /* Stretch items to equal height */
+    gap: 30px;
+    padding: 30px;
+    max-width: 1100px;
+    width: 90%;
+    background: rgba(46, 139, 87, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Info Section & Form Container */
+.info-container, .form-container {
+    background: rgba(46, 139, 87, 0.85);
+    border-radius: 20px;
+    padding: 40px;
+    width: 450px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: white;
+    min-height: 500px; /* Set a minimum height */
+}
+
+.info-container {
+    border-left: 7px solid #8BC34A;
+    background: rgba(46, 139, 87, 0.85);
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.info-container h1, .form-container h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.info-container h1 {
+    font-size: 40px;
+}
+
+.info-container p, .form-container p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.info-container ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+}
+
+.info-container ul li {
+    font-size: 18px;
+    padding: 10px 15px;
+    border-left: 4px solid #f0e68c;
+    transition: transform 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+.info-container ul li:hover {
+    transform: translateX(5px);
+    color: #f0e68c;
+}
+
+/* Profile Image Preview */
+.preview-container {
+    margin: 20px auto;
+    height: 120px;
+    width: 120px;
+    border: 2px dashed #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.preview-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Form Fields */
+.form-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"],
+.form-container input[type="phoneNumber"] {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    background: rgba(245, 245, 245, 0.8);
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.form-container input:focus {
+    border-color: #8BC34A;
+    box-shadow: 0 0 8px rgba(139, 195, 74, 0.3);
+}
+
+/* Row Styling */
+.form-container .row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-container .row input {
+    flex: 1;
+}
+
+/* Radio Button Styling */
+.form-container .radio-group {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    color: #333;
+}
+
+.form-container .radio-group label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Submit Button */
+.form-container button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #8BC34A, #2E8B57);
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 5px 12px rgba(46, 139, 87, 0.4);
+}
+
+.form-container button:hover {
+    background: linear-gradient(135deg, #6A9E3F, #1F5F3B);
+    box-shadow: 0 7px 18px rgba(46, 139, 87, 0.6);
+}
+
+/* Sign-in Link */
+.form-toggle {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #555;
+}
+
+.form-toggle a {
+    color: #8BC34A;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.form-toggle a:hover {
+    text-decoration: underline;
+    color: #6A9E3F;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .info-container,
+    .form-container {
+        width: 90%;
+        max-width: 500px;
+    }
+}

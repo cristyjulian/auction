@@ -38,8 +38,15 @@
                 
                 <!-- Profile Edit Modal -->
                 <div id="editInfoModal" class="modal">
+                    
                     <form action="/updateUserInfo" method="POST" enctype="multipart/form-data">
                         <button type="button" class="close-btn" onclick="closeEditModal()">✖</button>
+                         <label>Profile Picture:</label>
+                         <!-- Display existing profile picture -->
+                        <img id="editProfilePreview" src="/public/img/default-profile.png" alt="Profile Picture" width="100">
+                        <input type="file" id="editProfileImage" name="image" accept="image/*" onchange="previewEditImage(event)">
+                
+                        
                         <label>First Name:</label>
                         <input type="text" id="editFirstName" name="firstName" required>
                 
@@ -50,11 +57,7 @@
                         <input type="text" id="editPhoneNumber" name="phoneNumber" required>
                 
                 
-                        <label>Profile Picture:</label>
-                        <input type="file" id="editProfileImage" name="image" accept="image/*" onchange="previewEditImage(event)">
-                
-                        <!-- Display existing profile picture -->
-                        <img id="editProfilePreview" src="/public/img/default-profile.png" alt="Profile Picture" width="100">
+                       
                 
                         <button type="submit">Update Profile</button>
                     </form>
@@ -300,8 +303,7 @@
 
             <!-- Wholesale Fields (Initially Hidden) -->
             <div id="wholesaleFields" style="display: none;">
-                <label for="wholesaleQuantity">Wholesale Quantity</label>
-                <input type="number" id="wholesaleQuantity" name="wholesaleQuantity" min="1"><br><br>
+                
 
                 <label for="wholesaleUnit">Unit</label>
                 <select id="wholesaleUnit" name="wholesaleUnit">
@@ -316,6 +318,8 @@
                     <option value="boxes">Boxes</option>
                     <option value="containers">Containers</option>
                 </select><br><br>
+                <label for="wholesaleQuantity">Wholesale Quantity</label>
+                <input type="number" id="wholesaleQuantity" name="wholesaleQuantity" min="1"><br><br>
             </div>
 
             <!-- Auction Date and Time (Initially Hidden) -->
@@ -534,6 +538,11 @@
 
 
 <script>
+
+
+
+
+
 function toggleAuctionFields(isWholesale) {
     console.log("toggleAuctionFields executed, isWholesale:", isWholesale);
     document.getElementById("auctionFields").style.display = isWholesale ? "block" : "none";

@@ -7,6 +7,7 @@ const authTermsController = require('../controllers/auth/termsController');
 const profileController = require('../controllers/auth/profileController');
 const editController = require('../controllers/auth/editController');
 
+
 const adminIndexController = require('../controllers/admin/indexController');
 const adminManageCategoryController = require('../controllers/admin/manageCategoryController');
 const adminManageUserController = require('../controllers/admin/manageUsersController');
@@ -75,6 +76,8 @@ module.exports = function (app) {
 
 
   
+  
+  app.get('/buyer/notification', auctionResultController.markNotificationAsRead);
   app.get('/buyer/notification', buyerIndexController.markNotificationAsRead);
   app.get('/buyer/index', buyerIndexController.index);
   app.get('/buyer/getNotifications', buyerIndexController.getNotifications);

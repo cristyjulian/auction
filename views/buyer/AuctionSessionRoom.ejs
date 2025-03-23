@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auction Session Room</title>
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Basic CSS -->
     <style>
-        body {
+         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
@@ -18,8 +20,8 @@
         .session-container {
             margin: 20px auto;
             width: 90%;
-            background-color: #131111;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background-color: #4bad63;
+            box-shadow: 0 4px 10px rgba(189, 161, 161, 0.2);
             padding: 20px;
             border-radius: 10px;
             display: flex;
@@ -46,11 +48,11 @@
             align-items: center;
             font-size: 2rem;
             font-weight: bold;
-            color: #0056b3;
+            color: #f0f4f8;
         }
 
         .leave-button-header {
-            background-color: #d9534f;
+            background-color: #025a09;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -61,14 +63,14 @@
         }
 
         .leave-button-header:hover {
-            background-color: #c9302c;
+            background-color: #a30505;
         }
 
         .timer {
             text-align: center;
             font-size: 1.5rem;
             margin: 15px 0;
-            color: #444;
+            color: #faf3f3;
         }
 
         .leaderboard {
@@ -84,8 +86,8 @@
             text-align: center;
             flex: 1;
             min-width: 150px;
-            background: #101111;
-            color: white;
+            background: #4bad63;
+            color: rgb(249, 249, 252);
             font-weight: bold;
         }
 
@@ -149,7 +151,7 @@
         .other-bidders h3 {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #0056b3;
+            color: #068847;
             text-align: center;
         }
 
@@ -170,23 +172,28 @@
 
 <body>
     <div class="session-container">
+        <!-- Main Content Area -->
         <div class="main-content">
+            <!-- Header -->
             <div class="header">
                 <h2>Auction Session Room</h2>
+                <!-- Leave Bid Button in Header -->
                 <button class="leave-button-header" onclick="leaveBid()">Leave Bid</button>
             </div>
 
+            <!-- Timer -->
             <div class="timer">
                 <p>Auction Start: <strong><%= new Date(auctionStart).toLocaleString() %></strong></p>
                 <p>Auction End: <strong><%= new Date(auctionEnd).toLocaleString() %></strong></p>
                 <p>Session Time Left: <strong id="timer">Loading...</strong></p>
             </div>
 
+            <!-- Leaderboard Section -->
             <div class="leaderboard">
                 <% topBids.forEach((bid, index) => { %>
                     <% if (index < 3) { %>
                         <div class="card">
-                            <p><strong><%= index + 1 %></strong></p>
+                            <p><strong><%= index + 1 %></strong></p> <!-- Ranking Number -->
                             <p>Name: <strong><%= bid.buyer.firstName ?? '' %> <%= bid.buyer.lastName ?? '' %></strong></p>
                             <p>Phone: <%= bid.buyer.phoneNumber || 'N/A' %></p>
                             <p>Currently Submit: <strong>&#128176; ₱<%= bid.bid %></strong></p>
@@ -195,22 +202,42 @@
                 <% }) %>
             </div>
 
-            <div class="card">
-                <form action="" method="post">
-                    <img src="/public<%= product.image %>" class="product-image" />
-                    <div class="product-details">
-                        <p>Product Name: <strong><%= product.name %></strong></p>
-                        <p>Seller: <strong><%= sellerFirstName %> <%= sellerLastName %></strong></p>
-                        <p>Minimum Price: <strong>₱<%= product.minPrice %></strong></p>
-                        <p>Description: <strong><%= product.productInfo %></strong></p>
-                    </div>
-                    <h1>Submit Your Price</h1>
-                    <input type="number" name="submitPrice" placeholder="Enter Your Price" required>
-                    <button class="btn">Submit</button>
-                </form>
+        <!-- Submit Price Section -->
+        <div class="card">
+            <form action="" method="post">
+              <img src="/public<%= product.image %>" class="product-image" />
+            </a>
+            <div class="product-details">
+              <p>Product Name: <strong><%= product.name %></strong></p>
+              <p>
+                Product Seller:
+                <strong><%= sellerFirstName %> <%= sellerLastName %></strong>
+              </p>
+              <p>Minimum Price/Sacks: <strong>₱<%= product.minPrice %></strong></p>
+              <p>
+                Product Description: <strong><%= product.productInfo %></strong>
+              </p>
             </div>
+            <h1>Submit Your Price</h1>
+            <input
+              type="hidden"
+              name="sellerId"
+              value="<%= product.seller._id %>"
+            />
+            <input type="hidden" name="productId" value="<%= product._id %>" />
+            <input
+              type="number"
+              id="submitPrice"
+              name="submitPrice"
+              placeholder="Enter Your Price"
+              style="font-size: 1.2rem; padding: 8px; width: 100%; max-width: 200px;"
+            />
+            <button class="btn" onclick="submitPrice()">Submit</button>
+          </form>
         </div>
+      </div>
 
+        <!-- Other Bidders Section -->
         <div class="other-bidders">
             <h3>Other Bidders</h3>
             <% topBids.forEach((bid, index) => { %>
@@ -223,11 +250,10 @@
                 <% } %>
             <% }) %>
         </div>
-    </div>
+
     <!-- JavaScript -->
     <script>
         function leaveBid() {
-           
             window.location.href = "/buyer/index";
         }
 

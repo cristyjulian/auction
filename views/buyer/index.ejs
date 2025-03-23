@@ -199,7 +199,7 @@
                                             alt="<%= product.name %>" class="product-image">
                                     </div>
                                     <h4><%= product.name %></h4>
-                                    <p>Minimum Price: ₱<%= product.minPrice ? product.minPrice.toFixed(2) : 'Not Available' %></p>
+                                    <p>Minimum Price/Sack: ₱<%= product.minPrice ? product.minPrice.toFixed(2) : 'Not Available' %></p>
                                     <p>Pickup Address: <%= product.pickupAddress || 'Not Available' %></p>
                                     <%
                                     const auctionEndTime = new Date(product.auctionEnd);
@@ -279,7 +279,7 @@
                                                     alt="<%= product.name %>" class="product-image">
                                             </div>
                                             <h4><%= product.name %></h4>
-                                            <p>Minimum Price: ₱<%= product.minPrice ? product.minPrice.toFixed(2) : 'Not Available' %></p>
+                                            <p>Minimum Price/Sack: ₱<%= product.minPrice ? product.minPrice.toFixed(2) : 'Not Available' %></p>
                                             <p>Pickup Address: <%= product.pickupAddress || 'Not Available' %></p>
                                             
                                             <%
@@ -346,7 +346,7 @@
                 <img id="modal-auction-image" src="" alt="Auction Product" style="width: 100%; max-height: 300px; object-fit: contain;">
                 <p><strong>Name:</strong> <span id="auctionProductName"></span></p>
                 <p><strong>Type:</strong> <span id="auctionProductType"></span></p>
-                <p><strong>Minimum Price:</strong> ₱<span id="auctionProductPrice"></span></p>
+                <p><strong>Minimum Price/Sacks:</strong> ₱<span id="auctionProductPrice"></span></p>
                 <p><strong>Seller:</strong> <span id="auctionProductSeller"></span></p>
                 <p><strong>Session Start Date & Time:</strong> <span id="auctionStartTime"></span></p>
                 <p><strong>Session End Date & Time:</strong> <span id="auctionEndTime"></span></p>
@@ -869,7 +869,7 @@ function viewCurrentBids() {
                             <img src="/public${bid.productImage}" alt="Product Image" class="bid-product-img" style="width: 100%; height: auto; max-height: 300px; object-fit: contain; display: block; margin: auto;"> 
                             <h3>${bid.productName}</h3>
                             <p>Description: ${bid.productDescription}</p>
-                            <p>Minimum Price: ₱${bid.minimumPrice}</p>
+                            <p>Minimum Price/Sack: ₱${bid.minimumPrice}</p>
                             <p>Seller: ${bid.sellerName}</p>
                         
                             <p class="ongoing">Auction is Live!</p>

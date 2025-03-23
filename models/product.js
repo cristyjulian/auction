@@ -12,6 +12,7 @@ const productSchema = new mongoose.Schema({
     auctionStart: { type: Date, default: null }, // New field for auction start time
     auctionEnd: { type: Date, default: null }, // New field for auction end time
     pickupAddress: { type: String, required: true } // 🆕 New field for pickup address
+    
 });
 
 const Product = mongoose.model('Product', productSchema);

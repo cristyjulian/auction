@@ -184,6 +184,7 @@ th {
                     <p><strong>Name:</strong> <%= auctionSession[0].product.name %></p>
                     <p><strong>Description:</strong> <%= auctionSession[0].product.productInfo || 'N/A' %></p>
                     <p><strong>Starting Price:</strong> ₱<%= auctionSession[0].product.minPrice %></p>
+                    
                 <% } else { %>
                     <p>No product data available</p>
                 <% } %>

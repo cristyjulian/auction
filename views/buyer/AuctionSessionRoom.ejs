@@ -213,7 +213,12 @@
                 Product Seller:
                 <strong><%= sellerFirstName %> <%= sellerLastName %></strong>
               </p>
-              <p>Minimum Price/Sacks: <strong>₱<%= product.minPrice %></strong></p>
+                <!-- Display Wholesale Quantity and Unit if it's a Wholesale Product -->
+            <% if (product.productType === 'wholesale' && product.wholesaleQuantity && product.wholesaleUnit) { %>
+                <p>Quantity: <strong><%= product.wholesaleQuantity %> <%= product.wholesaleUnit %></strong></p>
+            <% } %>
+              <p>Minimum Price: <strong>₱<%= product.minPrice %></strong></p>
+
               <p>
                 Product Description: <strong><%= product.productInfo %></strong>
               </p>

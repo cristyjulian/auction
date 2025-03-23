@@ -11,8 +11,9 @@ const productSchema = new mongoose.Schema({
     status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' }, 
     auctionStart: { type: Date, default: null }, // New field for auction start time
     auctionEnd: { type: Date, default: null }, // New field for auction end time
-    pickupAddress: { type: String, required: true } // 🆕 New field for pickup address
-    
+    pickupAddress: { type: String, required: true }, // New field for pickup address
+    wholesaleQuantity: { type: Number, default: null }, // New field for wholesale quantity
+    wholesaleUnit: { type: String, enum: ['kg', 'mt', 'sacks', 'ha', 'm2', 'head', 'liters', 'gallons', 'boxes', 'containers'], default: null } // New field for unit selection
 });
 
 const Product = mongoose.model('Product', productSchema);

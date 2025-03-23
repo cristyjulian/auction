@@ -99,6 +99,8 @@ module.exports.addProduct = (req, res) => {
       auctionStart,
       auctionEnd,
       pickupAddress,
+      wholesaleQuantity,
+      wholesaleUnit,
     } = req.body;
 
     if (
@@ -107,9 +109,10 @@ module.exports.addProduct = (req, res) => {
       !name ||
       !minPrice ||
       !productInfo ||
-      !pickupAddress
+      !pickupAddress ||
+      (productType === "wholesale" && (!wholesaleQuantity || !wholesaleUnit))
     ) {
-      req.flash("error", "All fields, including pickup address, are required.");
+      req.flash("error", "All fields, including pickup address and wholesale details, are required.");
       return res.redirect("/farmer/index");
     }
 
@@ -128,6 +131,8 @@ module.exports.addProduct = (req, res) => {
         pickupAddress,
         auctionStart: productType === "wholesale" ? auctionStart || null : null,
         auctionEnd: productType === "wholesale" ? auctionEnd || null : null,
+        wholesaleQuantity: productType === "wholesale" ? wholesaleQuantity : null,
+        wholesaleUnit: productType === "wholesale" ? wholesaleUnit : null,
         status: "pending", // ✅ Default status: pending approval
       });
 
@@ -147,7 +152,6 @@ module.exports.addProduct = (req, res) => {
     }
   });
 };
-
 module.exports.getBuyers = async (req, res) => {
   try {
     const farmerId = req.session.login; // ✅ Ensure farmer is logged in

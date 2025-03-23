@@ -12,6 +12,7 @@ const adminIndexController = require('../controllers/admin/indexController');
 const adminManageCategoryController = require('../controllers/admin/manageCategoryController');
 const adminManageUserController = require('../controllers/admin/manageUsersController');
 const adminManageAuctionController = require('../controllers/admin/manageAuctionController');
+const adminManageAuctionResultController = require('../controllers/admin/manageAuctionResultController');
 const adminManageItemController = require('../controllers/admin/manageItemsController');
 
 
@@ -51,6 +52,7 @@ module.exports = function (app) {
   app.post('/admin/manageUsers/approve/:id', adminManageUserController.approveUser); // Added
   app.post('/admin/manageUsers/deactivate/:id', adminManageUserController.deactivateUser); // Added
   app.get('/admin/manageAuction', adminManageAuctionController.index);
+  app.get('/admin/manageAuctionresult', adminManageAuctionResultController.index);
   app.post('/admin/manageAuction/delete/:id', adminManageAuctionController.deleteOrder);
   app.get('/admin/manageItem', adminManageItemController.index);
   app.post('/admin/manageItem/approve/:id', adminManageItemController.approveProduct);
@@ -77,6 +79,7 @@ module.exports = function (app) {
 
   
   
+  //app.get('/buyer/notification', auctionResultController.notifyAuctionWinner);
   app.get('/buyer/notification', auctionResultController.markNotificationAsRead);
   app.get('/buyer/notification', buyerIndexController.markNotificationAsRead);
   app.get('/buyer/index', buyerIndexController.index);

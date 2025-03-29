@@ -85,7 +85,14 @@ module.exports.updateUserInfo = async (req, res) => {
       await user.save();
       console.log("Updated User:", user);
 
-      res.redirect("/buyer/index");
+      // Redirect based on user role
+      if (user.role === "farmer") {
+        return res.redirect("/farmer/index");
+      } else if (user.role === "buyer") {
+        return res.redirect("/buyer/index");
+      } else {
+        return res.redirect("/"); // Default redirect if role is unknown
+      }
     });
   } catch (error) {
     console.error("Update Error:", error);

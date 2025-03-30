@@ -52,7 +52,9 @@ module.exports = function (app) {
   app.post('/admin/manageUsers/approve/:id', adminManageUserController.approveUser); // Added
   app.post('/admin/manageUsers/deactivate/:id', adminManageUserController.deactivateUser); // Added
   app.get('/admin/manageAuction', adminManageAuctionController.index);
+  app.post('/admin/manageAuction/deleteOrder', adminManageAuctionController.deleteOrder);
   app.get('/admin/manageAuctionresult', adminManageAuctionResultController.index);
+  app.post('/admin/manageAuctionResult/delete', adminManageAuctionResultController.delete);
   app.post('/admin/manageAuction/delete/:id', adminManageAuctionController.deleteOrder);
   app.get('/admin/manageItem', adminManageItemController.index);
   app.post('/admin/manageItem/approve/:id', adminManageItemController.approveProduct);

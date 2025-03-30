@@ -1,73 +1,112 @@
-const Order = require('../../models/order');
-const Product = require('../../models/product');
+const AuctionResult = require('../../models/auctionResult'); // Import AuctionResult model
 const User = require('../../models/user');
+const Product = require('../../models/product');
+
 
 module.exports.index = async (req, res) => {
   try {
+    // ✅ Ensure user is logged in
     if (!req.session.login) {
       console.log("User not logged in, redirecting to login.");
       return res.redirect('/login');
     }
 
+    // ✅ Fetch logged-in user details
     const userLogin = await User.findById(req.session.login);
-    console.log("Logged-in User:", userLogin); // Log user details
+    console.log("Logged-in User:", userLogin);
 
     if (userLogin.role.toLowerCase() !== 'admin') {
       console.warn(`Access Denied: User ${userLogin.email} is not an Admin.`);
       return res.status(403).send('Access Denied: Admins only');
     }
 
-    let searchCategory = req.query.searchCategory || ''; // Get the search term from the query
+    // ✅ Handle search query
+    let searchAuction = req.query.searchAuction || '';
 
-    // Populate orders with product, seller, and buyer details, and apply search filter if provided
-    let ordersQuery = Order.find()
-      .populate('product', 'name image')
-      .populate('seller', 'firstName lastName profilePicture')
-      .populate('buyer', 'firstName lastName profilePicture');
-
-    if (searchCategory) {
-      // Apply search filter based on the category or product name
-      ordersQuery = ordersQuery.where('product.name').regex(new RegExp(searchCategory, 'i'));
+    // ✅ Query auction results with full related data
+    const auctionResults = await AuctionResult.find()
+  .populate({
+    path: 'product',
+    select: 'name image _id seller', // Ensure _id is selected
+    populate: {
+      path: 'seller',
+      select: 'firstName lastName',
     }
+  })
+  .populate({
+    path: 'highestBid',
+    select: 'bidAmount bidder',
+    populate: {
+      path: 'bidder',
+      select: 'firstName lastName phoneNumber'
+    }
+  })
+  .populate({
+    path: 'auctionSession',
+    select: 'sessionName startTime endTime'
+  })
+  .lean();
 
-    const orders = await ordersQuery;
+  auctionResults.forEach(result => {
+    console.log("Auction ID:", result._id);
+    console.log("Highest Bid Object:", result.highestBid); 
+    console.log("Winning Bid Amount:", result.highestBid?.bidAmount); 
+});
 
-    res.render('admin/manageAuctions', {
-      orders,
-      userLogin,
-      searchCategory, // Pass the search term to the view
-      site_title: 'PAO',
-      title: 'Manage Orders',
-      session: req.session,
-    });
+// ✅ Ensure each auction result contains winner details
+const formattedResults = auctionResults.map(result => ({
+  ...result,
+  winner: {
+    name: result.winnerName,
+    profile: result.winnerProfile,
+    phone: result.winnerPhone,
+  },
+  winningBid: result.winningBid 
+    ? `₱${result.winningBid.toLocaleString()}`
+    : 'No Bids',
+}));
+// ✅ Debugging: Final output check
+console.log("Final Auction Results:", formattedResults);
+
+res.render('admin/manageAuctionsResult', {
+  auctionResults: formattedResults, 
+  userLogin,
+  searchAuction,
+  site_title: 'PAO',
+  title: 'Manage Auction Results',
+  session: req.session,
+});
+
+
   } catch (error) {
-    console.error('Error displaying Manage Orders:', error);
+    console.error('Error displaying Manage Auction Results:', error);
     res.status(500).render('500', {
-      error: 'An error occurred while loading the Manage Orders page.',
+      error: 'An error occurred while loading the Manage Auction Results page.',
     });
   }
 };
 
-module.exports.deleteOrder = async (req, res) => {
-  try {
-    const orderId = req.body.orderId;  // Get the order ID from the form submission
 
-    // Find the order by ID and delete it
-    const order = await Order.findByIdAndDelete(orderId);
-    
-    if (!order) {
-      return res.status(404).send('Order not found');
+module.exports.delete = async (req, res) => {
+  try {
+    const { auctionId } = req.body;
+
+    if (!auctionId) {
+      return res.status(400).json({ error: 'Auction ID is required' });
     }
 
-    // Optionally delete the associated product if needed
-    // const product = await Product.findByIdAndDelete(order.product);
-    
-    console.log(`Order with ID: ${orderId} has been deleted.`); // Log for debugging
+    // Find and delete the auction result
+    const deletedAuction = await AuctionResult.findByIdAndDelete(auctionId);
 
-    // Redirect back to the manage orders page after deletion
-    res.redirect('/admin/manageAuction');  // Update with the correct route if needed
+    if (!deletedAuction) {
+      return res.status(404).json({ error: 'Auction result not found' });
+    }
+
+    req.flash('success', 'Auction result deleted successfully');
+    res.redirect('/admin/manageAuctionResult'); // Redirect back to the auction results page
   } catch (error) {
-    console.error('Error deleting order:', error);
-    res.status(500).send('Internal Server Error');
+    console.error('Error deleting auction result:', error);
+    req.flash('error', 'Failed to delete auction result');
+    res.status(500).redirect('/admin/manageAuctionResult');
   }
 };

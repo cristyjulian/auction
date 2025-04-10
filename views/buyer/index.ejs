@@ -53,8 +53,17 @@
                         <label>Phone Number:</label>
                         <input type="text" id="editPhoneNumber" name="phoneNumber" required>
                 
+                        <label for="currentPassword">Current Password (Optional):</label>
+                        <input type="password" id="currentPassword" name="currentPassword">
+                        <span class="toggle-password" onclick="togglePassword('currentPassword')">👁️</span>
                 
-                       
+                        <label for="newPassword">New Password (Optional):</label>
+                        <input type="password" id="newPassword" name="newPassword" onkeyup="validatePassword()">
+                        <span class="toggle-password" onclick="togglePassword('newPassword')">👁️</span>
+
+                        <label for="confirmPassword">Confirm Password (Optional):</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" onkeyup="validatePassword()">
+                        <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</span>
                 
                         <button type="submit">Update Profile</button>
                     </form>

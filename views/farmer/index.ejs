@@ -36,6 +36,8 @@
                     </button>
                 </li>
                 
+                
+                
                 <!-- Profile Edit Modal -->
                 <div id="editInfoModal" class="modal">
                     <form action="/updateUserInfo" method="POST" enctype="multipart/form-data">
@@ -48,103 +50,63 @@
                             <input type="file" id="editProfileImage" name="image" accept="image/*" onchange="previewEditImage(event)">
                         </div>
 
-                        <!-- First Name -->
+                        <!-- Form Grid Layout -->
+                        <div class="form-grid">
+                            <!-- First Name -->
+                            <div class="form-group">
+                                <label for="editFirstName">First Name:</label>
+                                <input type="text" id="editFirstName" name="firstName" required>
+                            </div>
+
+                            <!-- Last Name -->
+                            <div class="form-group">
+                                <label for="editLastName">Last Name:</label>
+                                <input type="text" id="editLastName" name="lastName" required>
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="form-group">
+                                <label for="editPhoneNumber">Phone Number:</label>
+                                <input type="text" id="editPhoneNumber" name="phoneNumber" required>
+                            </div>
+                        </div>
+
                         <div class="form-group">
-                            <label for="editFirstName">First Name:</label>
-                            <input type="text" id="editFirstName" name="firstName" required>
+                            <label for="currentPassword">
+                                Current Password: <span class="optional-label">(Optional)</span>
+                            </label>
+                            <div class="password-wrapper">
+                                <input type="password" id="currentPassword" name="currentPassword">
+                                <span class="toggle-password" onclick="togglePassword('currentPassword')">👁️</span>
+                            </div>
                         </div>
-
-                        <!-- Last Name -->
+                        
                         <div class="form-group">
-                            <label for="editLastName">Last Name:</label>
-                            <input type="text" id="editLastName" name="lastName" required>
+                            <label for="newPassword">
+                                New Password: <span class="optional-label">(Optional)</span>
+                            </label>
+                            <div class="password-wrapper">
+                                <input type="password" id="newPassword" name="newPassword" onkeyup="validatePassword()">
+                                <span class="toggle-password" onclick="togglePassword('newPassword')">👁️</span>
+                            </div>
                         </div>
-
-                        <!-- Phone Number -->
+                        
                         <div class="form-group">
-                            <label for="editPhoneNumber">Phone Number:</label>
-                            <input type="text" id="editPhoneNumber" name="phoneNumber" required>
+                            <label for="confirmPassword">
+                                Confirm Password: <span class="optional-label">(Optional)</span>
+                            </label>
+                            <div class="password-wrapper">
+                                <input type="password" id="confirmPassword" name="confirmPassword" onkeyup="validatePassword()">
+                                <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</span>
+                            </div>
                         </div>
-
-                        <!-- Password Fields -->
-                        <div class="form-group password-container">
-                            <label for="currentPassword">Current Password (Optional):</label>
-                            <input type="password" id="currentPassword" name="currentPassword">
-                            <span class="toggle-password" onclick="togglePassword('currentPassword')">👁️</span>
-                        </div>
-
-                        <div class="form-group password-container">
-                            <label for="newPassword">New Password (Optional):</label>
-                            <input type="password" id="newPassword" name="newPassword" onkeyup="validatePassword()">
-                            <span class="toggle-password" onclick="togglePassword('newPassword')">👁️</span>
-                        </div>
-
-                        <div class="form-group password-container">
-                            <label for="confirmPassword">Confirm Password (Optional):</label>
-                            <input type="password" id="confirmPassword" name="confirmPassword" onkeyup="validatePassword()">
-                            <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</span>
-                        </div>
+                        
 
                         <!-- Submit Button -->
                         <div class="button-container">
                             <button type="submit">Update Profile</button>
                         </div>
                     </form>
-                </div>
-                
-                <!-- Edit Profile Modal -->
-                <div id="editProfileModal" class="modal">
-                <div class="modal-content">
-                    <spa</h2>
-
-                    <form id="editProfileForm">
-                        <!-- Profile Picture -->
-                        <div class="profile-picture-container">
-                            <img 
-                                src="<%= userLogin.profilePicture ? userLogin.profilePicture : '/public/img/default-profile.png' %>" 
-                                alt="Profile Picture" 
-                                class="profile-picture">
-                            <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
-                        </div>
-
-                        <!-- First Name -->
-                        <label for="firstName">First Name:</label>
-                        <input type="text" id="firstName" name="firstName" value="<%= userLogin.firstName %>" required>
-
-                        <!-- Last Name -->
-                        <label for="lastName">Last Name:</label>
-                        <input type="text" id="lastName" name="lastName" value="<%= userLogin.lastName %>" required>
-
-                        <!-- Email -->
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" value="<%= userLogin.email %>" required>
-
-                        <!-- Phone Number -->
-                        <label for="phoneNumber">Phone Number:</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" value="<%= userLogin.phoneNumber %>" required>
-
-                        <!-- Role -->
-                        <label for="role">Role:</label>
-                        <input type="text" id="role" name="role" value="<%= userLogin.role %>" readonly>
-
-                        <!-- Gender -->
-                        <label for="gender">Gender:</label>
-                        <select id="gender" name="gender">
-                            <option value="Male" <%= userLogin.gender === 'Male' ? 'selected' : '' %>>Male</option>
-                            <option value="Female" <%= userLogin.gender === 'Female' ? 'selected' : '' %>>Female</option>
-                        </select>
-
-                        <!-- Password -->
-                        <label for="password">New Password:</label>
-                        <input type="password" id="password" name="password" placeholder="Enter new password (optional)">
-
-                        <!-- Confirm Password -->
-                        <label for="confirmPassword">Confirm Password:</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm new password">
-
-                        <button type="submit">Save Changes</button>
-                    </form>
-                </div>
                 </div>
 
     
@@ -235,14 +197,36 @@
             </div>
             
             </div>
-            <div class="search-container">
+            <div class="search-container" style="position: relative;">
                 <button id="notificationButton" class="notification-button" style="color: navy;">
                     <img src="/public/img/bell.png" alt="Notification Icon" class="notification-icon">
                     <span class="notification-count" id="notificationCount">
-                        <%= notifications.filter(notification => notification.status === 'unread').length %> <!-- Count unread notifications -->
+                        <%= notifications.filter(notification => notification.status === 'unread').length %>
                     </span>
                 </button>
-                <div class="settings-container">
+            
+                <!-- Dropdown Notification Panel -->
+                <div id="notificationDropdown" class="notification-dropdown">
+                    <div class="dropdown-header">
+                        <h4>Notifications</h4>
+                    </div>
+                    <ul id="notificationList">
+                        <% notifications.forEach(notification => { %>
+                            <li class="notification-item <%= notification.status === 'unread' ? 'unread' : 'read' %>">
+                                <p><%= notification.message %></p>
+                                <% if (notification.status === 'unread') { %>
+                                    <a href="/farmer/notification?notification_id=<%= notification._id %>" class="btn btn-primary mark-as-read">
+                                        Seen
+                                    </a>
+                                <% } %>
+                                <span class="close-notification" onclick="closeNotification('<%= notification._id %>')">×</span>
+                            </li>
+                        <% }); %>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="search-container" style="position: relative;">
                     <button class="settings-button" onclick="toggleSettingsDropdown()">
                         <img src="/public/img/settings.png" alt="Settings Icon" class="settings-icon">
                     </button>
@@ -530,28 +514,7 @@
     <footer>
         <div class="footer-left">
 
-        </div>
-        <!-- Modal for notifications -->
-        <div id="notificationModal" class="modal">
-            <div class="modal-content">
-                <span class="close" id="closeModalButton">&times;</span>
-                <center><h3>Notifications</h3></center>
-                <ul id="notificationList">
-                    <% notifications.forEach(notification => { %>
-                        <li id="notification-<%= notification._id %>" class="notification <%= notification.status === 'unread' ? 'unread' : 'read' %>">
-                            <p><%= notification.message %></p>
-                            <% if (notification.status === 'unread') { %>
-                                <a href="/farmer/notification?notification_id=<%= notification._id %>" class="btn btn-primary mark-as-read">
-                                    Seen
-                                </a>
-                            <% } %>
-                            <span class="close-notification" onclick="closeNotification('<%= notification._id %>')">&times;</span>
-                        </li>
-                    <% }); %>
-                </ul>
-                
-                
-            </div>
+       
         </div>
         
     
@@ -691,63 +654,63 @@ function openEditModal() {
         });
     });
     
-        document.addEventListener('DOMContentLoaded', function() {
-               // Get the modal and notification button
-               const modal = document.getElementById("notificationModal");
-               const notificationButton = document.getElementById("notificationButton");
-               const closeModalButton = document.getElementById("closeModalButton");
-       
-               // Open the modal when the notification button is clicked
-               notificationButton.onclick = function() {
-                   modal.style.display = "block";
-               }
-       
-               // Close the modal when the close button is clicked
-               closeModalButton.onclick = function() {
-                   modal.style.display = "none";
-               }
-       
-               // Close the modal if the user clicks outside of the modal
-               window.onclick = function(event) {
-                   if (event.target == modal) {
-                       modal.style.display = "none";
-                   }
-               }
-       
-               // Attach event listeners for each "close" button in the notification list
-               const closeButtons = document.querySelectorAll('.close-notification');
-               closeButtons.forEach(button => {
-                   button.addEventListener('click', function(event) {
-                       const notificationId = event.target.getAttribute('data-notification-id');
-                       closeNotification(notificationId);
-                   });
-               });
-           });
-       
-           // Function to close individual notification
-           // Close notification and hide it temporarily using localStorage
-       function closeNotification(notificationId) {
-           // Save the closed notification ID to localStorage
-           let closedNotifications = JSON.parse(localStorage.getItem('closedNotifications')) || [];
-           closedNotifications.push(notificationId);
-           localStorage.setItem('closedNotifications', JSON.stringify(closedNotifications));
-       
-           // Hide the notification element on the page
-           const notificationElement = document.getElementById(`notification-${notificationId}`);
-           notificationElement.style.display = 'none';
-       }
-       // Check localStorage for closed notifications and hide them on page load
-       window.onload = function() {
-           const closedNotifications = JSON.parse(localStorage.getItem('closedNotifications')) || [];
-       
-           // Hide all closed notifications
-           closedNotifications.forEach(notificationId => {
-               const notificationElement = document.getElementById(`notification-${notificationId}`);
-               if (notificationElement) {
-                   notificationElement.style.display = 'none';
-               }
-           });
-       };
+    document.addEventListener('DOMContentLoaded', function() {
+    // Get the notification button and dropdown
+    const notificationButton = document.getElementById('notificationButton');
+    const dropdown = document.getElementById('notificationDropdown');
+    const closeModalButton = document.getElementById('closeModalButton');
+    
+    // Open the dropdown when the notification button is clicked
+    notificationButton.onclick = function() {
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Close the dropdown when the close button is clicked
+    closeModalButton.onclick = function() {
+        dropdown.style.display = 'none';
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!notificationButton.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = 'none';
+        }
+    }
+
+    // Attach event listeners for each "close" button in the notification list
+    const closeButtons = document.querySelectorAll('.close-notification');
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            const notificationId = event.target.getAttribute('data-notification-id');
+            closeNotification(notificationId);
+        });
+    });
+});
+
+// Function to close individual notification
+function closeNotification(notificationId) {
+    // Save the closed notification ID to localStorage
+    let closedNotifications = JSON.parse(localStorage.getItem('closedNotifications')) || [];
+    closedNotifications.push(notificationId);
+    localStorage.setItem('closedNotifications', JSON.stringify(closedNotifications));
+
+    // Hide the notification element on the page
+    const notificationElement = document.getElementById(`notification-${notificationId}`);
+    notificationElement.style.display = 'none';
+}
+
+// Check localStorage for closed notifications and hide them on page load
+window.onload = function() {
+    const closedNotifications = JSON.parse(localStorage.getItem('closedNotifications')) || [];
+
+    // Hide all closed notifications
+    closedNotifications.forEach(notificationId => {
+        const notificationElement = document.getElementById(`notification-${notificationId}`);
+        if (notificationElement) {
+            notificationElement.style.display = 'none';
+        }
+    });
+};
 
        
 let ordersData = []; // Stores all fetched orders

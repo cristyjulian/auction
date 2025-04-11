@@ -517,8 +517,8 @@ footer {
     z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    width: 95%; /* Full width */
+    height: 95%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(0, 0, 0, 0.4); /* Background with opacity */
 }
@@ -541,7 +541,7 @@ footer {
     background: #fff;
     padding: 30px;
     border-radius: 12px;
-    width: 95%;
+    width: 85%;
     max-width: 600px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     position: fixed;
@@ -1092,7 +1092,7 @@ button {
 
 /* Styling for the "Your Products" label with a persuasive style */
 .products-label {
-    font-family: 'Satisfy', cursive; /* Apply the Satisfy font */
+    font-family: 'Satisfy', ; /* Apply the Satisfy font */
     font-size: 40px; /* Adjust font size */
     font-weight: normal; /* Keep the font weight normal for this style */
     color: #333; /* Dark color for the label */
@@ -1103,7 +1103,7 @@ button {
 }
 /* Styling for the Categories label */
 .categories-label {
-    font-family: 'Satisfy', cursive; /* Apply the Satisfy font */
+    font-family: 'Satisfy', ; /* Apply the Satisfy font */
     font-size: 40px; /* Adjust font size */
     font-weight: normal; /* Keep the font weight normal for this style */
     color: #080808; /* Dark color for the label */
@@ -1277,7 +1277,7 @@ button {
 
 /* Modal Content */
 .notification-modal-content {
-    background-color: #fff;
+    background-color: #070606;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;

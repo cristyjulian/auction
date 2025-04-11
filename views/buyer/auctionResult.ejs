@@ -71,21 +71,23 @@ body {
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
 /* Product Image and Winner Profile */
 .product-info img, .winner-info img {
-    width: 80%;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    width: 150px; /* Fixed image width for consistency */
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Heading for Sections */
 h2 {
-    font-size: 1.2rem;
+    font-size: 2rem;
     margin: 10px 0;
 }
 
@@ -119,7 +121,7 @@ th {
 @media screen and (max-width: 768px) {
     /* Adjust banner font size */
     .banner h1 {
-        font-size: 1.5rem;
+        font-size: 3rem;
     }
 
     /* Stack content vertically for smaller screens */
@@ -135,7 +137,7 @@ th {
 
     /* Adjust font size for mobile screens */
     .product-info p, .winner-info p, .bid-ranking h2 {
-        font-size: 1rem;
+        font-size: 4rem;
     }
 
     /* Reduce padding on smaller screens */
@@ -149,22 +151,22 @@ th {
 @media screen and (max-width: 480px) {
     /* Banner font size */
     .banner h1 {
-        font-size: 1.2rem;
+        font-size: 3rem;
     }
 
     /* Make back button smaller and more accessible */
     .banner a {
-        font-size: 0.9rem;
+        font-size: 4rem;
         padding: 8px 16px;
     }
 
     /* Smaller font sizes for content */
     .product-info p, .winner-info p, .bid-ranking h2 {
-        font-size: 0.9rem;
+        font-size: 4rem;
     }
 
     .footer {
-        font-size: 0.9rem;
+        font-size: 3rem;
     }
 }
 
@@ -173,7 +175,7 @@ th {
 <body>
     <div class="container">
         <div class="banner">
-            <h1>Auction Result </h1>
+            <h1> Auction Result </h1>
             <a href="javascript:history.back()">Back</a>
         </div>
         <div class="content">
@@ -191,7 +193,7 @@ th {
             </div>
 
             <div class="winner-info">
-                <h1> Winner</h1>
+                <h2> Winner </h2>
                 <% if (winner) { %>
                     <img src="<%= winner.image || '/default.jpg' %>" alt="Winner Profile Picture">
                     <p><strong>Name:</strong> <%= winner.bidder %></p>
@@ -210,15 +212,21 @@ th {
                         <th>Name</th>
                         <th>Bid Price</th>
                     </tr>
-                    <% highestBid.forEach((bid, index) => { %>
-                        <% if (index > 0) { %> <!-- Skip winner -->
-                            <tr>
-                                <td><%= bid.rank %></td>  <!-- Rank starts at 2 -->
-                                <td><%= bid.bidder %></td>
-                                <td>₱<%= bid.bidAmount %></td>
-                            </tr>
-                        <% } %>
-                    <% }); %>
+                    <% if (highestBid && highestBid.length > 1) { %>
+                        <% highestBid.forEach((bid, index) => { %>
+                            <% if (index > 0) { %> <!-- Skip the winner -->
+                                <tr>
+                                    <td><%= bid.rank %></td>  <!-- Rank starts at 2 -->
+                                    <td><%= bid.bidder %></td>
+                                    <td>₱<%= bid.bidAmount %></td>
+                                </tr>
+                            <% } %>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="3" class="text-center text-muted">No additional bids</td>
+                        </tr>
+                    <% } %>
                 </table>
             </div>
         </div>

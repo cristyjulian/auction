@@ -495,48 +495,181 @@ footer {
 /* Profile Edit Modal Styles */
 
 
-/* Center the modal */
 #editInfoModal form {
     background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 12px;
+    width: 95%;
+    max-width: 600px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Perfectly centers the modal */
-    text-align: center;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
 }
-#editInfoModal img#editProfilePreview {
+
+#editInfoModal .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+/* Form Group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+#editInfoModal label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+/* Inputs */
+#editInfoModal input,
+#editInfoModal select,
+#editInfoModal textarea {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+}
+
+/* Password Field with Eye Icon */
+.password-container {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.password-container input {
+    padding-right: 40px;
+}
+
+.password-container .toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 34px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+}
+
+/* Profile Picture */
+.profile-section {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#editProfilePreview {
     display: block;
-    margin: 10px auto;
+    margin: 0 auto 12px;
     border-radius: 50%;
-    border: 2px solid #ddd;
-    width: 80px;
-    height: 80px;
+    border: 3px solid #444;
+    width: 120px;
+    height: 120px;
     object-fit: cover;
 }
 
-#editInfoModal button[type="submit"]:hover {
-    background-color: #218838;
-}
-/* Close Button */
-.close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    cursor: pointer;
+#editInfoModal input[type="file"] {
+    font-size: 16px;
+    width: auto;
+    margin: 0 auto;
 }
 
-.close:hover {
+/* Submit Button */
+.button-container {
+    text-align: center;
+}
+
+#editInfoModal button[type="submit"] {
+    font-size: 16px;
+    padding: 12px 30px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+#editInfoModal button[type="submit"]:hover {
+    background-color: #0c09d1;
+    transform: scale(1.05);
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+}
+
+.close-btn:hover {
     color: red;
 }
+/* Password Wrapper */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px; /* give space for the eye icon */
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.password-wrapper .toggle-password {
+    position: absolute;
+    right: 12px;
+    color: #888;
+    font-size: 18px;
+    cursor: pointer;
+    user-select: none;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#editInfoModal button[type="submit"] {
+    font-size: 18px;
+    padding: 12px 30px;
+    font-weight: bold;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    display: block;
+    margin: 0 auto;
+}
+.optional-label {
+    font-size: 12px;
+    font-weight: normal;
+    color: #888;
+    margin-left: 5px;
+}
 
 /* Styling for Add Product button */
 .add-product-button {

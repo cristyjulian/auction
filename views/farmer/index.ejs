@@ -38,28 +38,57 @@
                 
                 <!-- Profile Edit Modal -->
                 <div id="editInfoModal" class="modal">
-                    
                     <form action="/updateUserInfo" method="POST" enctype="multipart/form-data">
                         <button type="button" class="close-btn" onclick="closeEditModal()">✖</button>
-                         <label>Profile Picture:</label>
-                         <!-- Display existing profile picture -->
-                        <img id="editProfilePreview" src="/public/img/default-profile.png" alt="Profile Picture" width="100">
-                        <input type="file" id="editProfileImage" name="image" accept="image/*" onchange="previewEditImage(event)">
-                
-                        
-                        <label>First Name:</label>
-                        <input type="text" id="editFirstName" name="firstName" required>
-                
-                        <label>Last Name:</label>
-                        <input type="text" id="editLastName" name="lastName" required>
-                
-                        <label>Phone Number:</label>
-                        <input type="text" id="editPhoneNumber" name="phoneNumber" required>
-                
-                
-                       
-                
-                        <button type="submit">Update Profile</button>
+
+                        <!-- Profile Picture -->
+                        <div class="profile-section">
+                            <label>Profile Picture:</label>
+                            <img id="editProfilePreview" src="/public/img/default-profile.png" alt="Profile Picture">
+                            <input type="file" id="editProfileImage" name="image" accept="image/*" onchange="previewEditImage(event)">
+                        </div>
+
+                        <!-- First Name -->
+                        <div class="form-group">
+                            <label for="editFirstName">First Name:</label>
+                            <input type="text" id="editFirstName" name="firstName" required>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="form-group">
+                            <label for="editLastName">Last Name:</label>
+                            <input type="text" id="editLastName" name="lastName" required>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="form-group">
+                            <label for="editPhoneNumber">Phone Number:</label>
+                            <input type="text" id="editPhoneNumber" name="phoneNumber" required>
+                        </div>
+
+                        <!-- Password Fields -->
+                        <div class="form-group password-container">
+                            <label for="currentPassword">Current Password (Optional):</label>
+                            <input type="password" id="currentPassword" name="currentPassword">
+                            <span class="toggle-password" onclick="togglePassword('currentPassword')">👁️</span>
+                        </div>
+
+                        <div class="form-group password-container">
+                            <label for="newPassword">New Password (Optional):</label>
+                            <input type="password" id="newPassword" name="newPassword" onkeyup="validatePassword()">
+                            <span class="toggle-password" onclick="togglePassword('newPassword')">👁️</span>
+                        </div>
+
+                        <div class="form-group password-container">
+                            <label for="confirmPassword">Confirm Password (Optional):</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" onkeyup="validatePassword()">
+                            <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</span>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="button-container">
+                            <button type="submit">Update Profile</button>
+                        </div>
                     </form>
                 </div>
                 
